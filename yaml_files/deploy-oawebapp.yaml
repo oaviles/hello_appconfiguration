@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: appconfig
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: oaappconfig
+  name: oaappconfig
+  namespace: appconfig
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: oaappconfig
+  template:
+    metadata:
+      labels:
+        app: oaappconfig
+    spec:
+      containers:
+      - image: ["HERE YOUR ACR NAME"].azurecr.io/oawebappconfig
+        name: oaappconfig
+        env:
+        - name: APPCONFIG_CS
+          value: ["HERE YOUR APP CONFIG CONNECTION STRING"]
+        - name: APPCONFIG_KEY
+          value: ["HERE YOUR CONFIGURATION KEYS"]
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5141
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: oaappconfig
+    namespace: appconfig
+    labels:
+        app: oaappconfig
+spec:
+    type: LoadBalancer
+    ports:
+    - port: 80
+      targetPort: 5141
+      protocol: TCP
+      name: http
+    selector:
+        app: oaappconfig
