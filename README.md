@@ -10,6 +10,7 @@ Centralized app configuration, reference architecture:
 - [Create an ASP.NET Core app with Azure App Configuration](https://learn.microsoft.com/en-us/azure/azure-app-configuration/quickstart-aspnet-core-app?tabs=core6x)
 - [Use dynamic configuration in an ASP.NET Core app](https://learn.microsoft.com/en-us/azure/azure-app-configuration/enable-dynamic-configuration-aspnet-core?tabs=core6x)
 - [Add feature flags to an ASP.NET Core app](https://learn.microsoft.com/en-us/azure/azure-app-configuration/quickstart-feature-flag-aspnet-core?tabs=core6x)
+- [Manage feature flags in Azure App Configuration](https://learn.microsoft.com/en-us/azure/azure-app-configuration/manage-feature-flags)
 
 ### Check More DevSquad Projects
 * [DevSquad Main Project](https://github.com/microsoft/devsquad-accelerators)
