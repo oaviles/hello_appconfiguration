@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "bhMaOyBYYAxwQTva6KMgeuWg+pE4ab4/wAGaOdbnFVBmTOMyNdfDv95xm4MN99kuS1zwO5s119DI3i1CjrnCIw==",
+  "dgSpecHash": "UYdJ9Fr1ziggiLAFEbJStF884hzGhpbRkU+de7gAwKRys9XsJux9mfbr/eXGtxamLwDOICUCHkHuJl/iZ2W0Ng==",
   "success": true,
-  "projectFilePath": "C:\\Users\\edaviles\\code\\OAAppConfig\\OAAppConfig.csproj",
+  "projectFilePath": "C:\\Users\\edaviles\\code\\hello_appconfiguration\\OAAppConfig.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\edaviles\\.nuget\\packages\\azure.core\\1.23.0\\azure.core.1.23.0.nupkg.sha512",
     "C:\\Users\\edaviles\\.nuget\\packages\\azure.data.appconfiguration\\1.2.0\\azure.data.appconfiguration.1.2.0.nupkg.sha512",

@@ -971,11 +971,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\edaviles\\code\\OAAppConfig\\OAAppConfig.csproj",
+      "projectUniqueName": "C:\\Users\\edaviles\\code\\hello_appconfiguration\\OAAppConfig.csproj",
       "projectName": "OAAppConfig",
-      "projectPath": "C:\\Users\\edaviles\\code\\OAAppConfig\\OAAppConfig.csproj",
+      "projectPath": "C:\\Users\\edaviles\\code\\hello_appconfiguration\\OAAppConfig.csproj",
       "packagesPath": "C:\\Users\\edaviles\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\edaviles\\code\\OAAppConfig\\obj\\",
+      "outputPath": "C:\\Users\\edaviles\\code\\hello_appconfiguration\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\edaviles\\AppData\\Roaming\\NuGet\\NuGet.Config"
