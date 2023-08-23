@@ -1,5 +1,5 @@
 using Microsoft.Extensions.Configuration.AzureAppConfiguration;
-using OAAppConfig;
+using TestAppConfig;
 using Microsoft.FeatureManagement;
 
 var builder = WebApplication.CreateBuilder(args);
