@@ -1,4 +1,4 @@
-namespace TestAppConfig
+namespace OAAppConfig
 {
     public class Settings
     {

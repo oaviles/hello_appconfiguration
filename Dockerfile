@@ -12,17 +12,17 @@ USER appuser
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 ARG configuration=Release
 WORKDIR /src
-COPY ["TestAppConfig.csproj", "./"]
-RUN dotnet restore "TestAppConfig.csproj"
+COPY ["OAAppConfig.csproj", "./"]
+RUN dotnet restore "OAAppConfig.csproj"
 COPY . .
 WORKDIR "/src/."
-RUN dotnet build "TestAppConfig.csproj" -c $configuration -o /app/build
+RUN dotnet build "OAAppConfig.csproj" -c $configuration -o /app/build
 
 FROM build AS publish
 ARG configuration=Release
-RUN dotnet publish "TestAppConfig.csproj" -c $configuration -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "OAAppConfig.csproj" -c $configuration -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "TestAppConfig.dll"]
+ENTRYPOINT ["dotnet", "OAAppConfig.dll"]
