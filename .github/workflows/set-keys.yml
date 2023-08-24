@@ -6,7 +6,7 @@ env:
   AZURE_REGION: eastus
   AZURE_RG: oa-poc-rg
   APP_CONFIGURATION_NAME: oaappconfig02
-  MESSAGE: "OA was here. V1.0"
+  SENTINEL: 2
   
 
 jobs:
@@ -23,11 +23,13 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
     - name: Set Keys
+      env:
+        MESSAGE: "OA was here. V1.0"
       uses: azure/CLI@v1
       with:
         inlineScript: |
           az appconfig kv set -n ${{ env.APP_CONFIGURATION_NAME }} --key Pod2:Settings:BackgroundColor --value red --yes
           az appconfig kv set -n ${{ env.APP_CONFIGURATION_NAME }} --key Pod2:Settings:FontColor --value white --yes
           az appconfig kv set -n ${{ env.APP_CONFIGURATION_NAME }} --key Pod2:Settings:FontSize --value 20 --yes
-          az appconfig kv set -n ${{ env.APP_CONFIGURATION_NAME }} --key Pod1:Settings:Message --value ${{ env.MESSAGE }} --yes
-          az appconfig kv set -n ${{ env.APP_CONFIGURATION_NAME }} --key Pod1:Settings:Sentinel --value 2 --yes
+          az appconfig kv set -n ${{ env.APP_CONFIGURATION_NAME }} --key Pod2:Settings:Message --value $MESSAGE --yes
+          az appconfig kv set -n ${{ env.APP_CONFIGURATION_NAME }} --key Pod2:Settings:Sentinel --value ${{ env.SENTINEL }} --yes
