@@ -7,6 +7,7 @@ env:
   AZURE_RG: oa-poc-rg
   AKS_CLUSTER_NAME: spAKSCluster
   AZURE_SUBSCRIPTION: ${{ secrets.AZURE_SUBSCRIPTION }}
+  ACR_NAME: ${{ secrets.ACR_NAME }}
 
 jobs:
   deploy-bicep-template:
@@ -26,6 +27,7 @@ jobs:
       with:
         inlineScript: |
           az group create --location ${{ env.AZURE_REGION }} --name ${{ env.AZURE_RG }}  
+          az acr create --resource-group ${{ env.AZURE_RG }} --name ${{ env.ACR_NAME }} --sku Basic --location ${{ env.AZURE_REGION }}
 
       # Deploy Bicep file
     - name: Deploy App Config
