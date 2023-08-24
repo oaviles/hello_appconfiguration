@@ -6,7 +6,8 @@ env:
   CLUSTER_NAME: AKSClsuter-Demo
   AZURE_RG: oa-poc-rg
   NAMESPACE: appconfig
-  IMAGE: ${{ secrets.CONTAINER_REGISTRY }}/oawebappconfig
+  IMAGE_NAME: oawebappconfig
+  AZURE_CONTAINER_REGISTRY: ${{ secrets.CONTAINER_REGISTRY }}
   TAG: 5141
 
 jobs:
@@ -22,18 +23,20 @@ jobs:
         cluster-name: ${{ env.CLUSTER_NAME }}
         resource-group: ${{ env.AZURE_RG }}
 
-    - name: Set up Kustomize
-      run: |-
-        curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
-        chmod u+x ./kustomize
-        ls -l
+      # Runs Kustomize to create manifest files
+    - name: Bake deployment
+      uses: azure/k8s-bake@v2
+      with:
+        renderEngine: "kustomize"
+        kustomizationPath: ${{ env.KUSTOMIZE_PATH }}
+        kubectl-version: latest
+      id: bake
 
-    - name: Deploy
-      run: |-
-        # replacing the image name in the k8s template
-        ls -l
-        cd yaml_files
-        cp deploy-oawebapp.yaml kustomization.yaml
-        
-        kustomize edit set image ${{ env.CLUSTER_NAME }}:${{ env.TAG }}
-        kustomize build . | kubectl apply -f -
+      # Deploys application based on manifest files from previous step
+    - name: Deploy application
+      uses: Azure/k8s-deploy@v4
+      with:
+        action: deploy
+        manifests: ${{ steps.bake.outputs.manifestsBundle }}
+        images: |
+          ${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
