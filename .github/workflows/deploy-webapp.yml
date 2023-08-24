@@ -30,6 +30,8 @@ jobs:
       run: |-
         curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
         chmod u+x ./kustomize
+        mv kustomize /usr/local/bin
+        kustomize --help
 
     - name: Create Namespace
       run: |
@@ -42,7 +44,7 @@ jobs:
         ls -s
         cd yaml_files
         ls -l
-        ./kustomize edit set image ${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
-        ./kustomize build . | kubectl apply -f -
+        kustomize edit set image ${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
+        kustomize build . | kubectl apply -f -
 
         
