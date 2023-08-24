@@ -10,7 +10,7 @@ env:
   
 
 jobs:
-  set-key-appconfig:
+  set-keys-appconfig:
     runs-on: ubuntu-latest
     steps:
 
