@@ -46,7 +46,7 @@ jobs:
         ls -l
         kustomize edit set image ${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
         kustomize build . 
-        cat kustomize.yaml
-        kubectl create -f kustomize.yaml
+        cat kustomization.yaml
+        kubectl create -f kustomization.yaml
 
         
