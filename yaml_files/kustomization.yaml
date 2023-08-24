@@ -4,8 +4,3 @@ kind: Kustomization
 resources:
 - deploy-webapp.yaml
 - service-webapp.yaml
-
-images:
-- name: appconfig
-  newName: hereyouracr.azurecr.io/oawebappconfig
-  newTag: 5141
