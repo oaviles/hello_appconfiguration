@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "configStoreName": {
-      "value": "oaappconfig05"
+      "value": "oaappconfig02"
     },
     "location": {
       "value": "eastus"
