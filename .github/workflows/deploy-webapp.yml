@@ -1,0 +1,36 @@
+name: 5 Deploy Web App
+
+on: [workflow_dispatch]
+
+env:
+  CLUSTER_NAME: AKSClsuter-Demo
+  AZURE_RG: oa-poc-rg
+  NAMESPACE: appconfig
+  IMAGE: ${{ secrets.CONTAINER_REGISTRY }}/oawebappconfig
+  TAG: 5141
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+      
+    # Set the target AKS cluster.
+    - uses: Azure/aks-set-context@v1
+      with:
+        creds: '${{ secrets.AZURE_CREDENTIALS }}'
+        cluster-name: ${{ env.CLUSTER_NAME }}
+        resource-group: ${{ env.AZURE_RG }}
+
+    - name: Set up Kustomize
+      run: |-
+        curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
+        chmod u+x ./kustomize
+
+    - name: Deploy
+      run: |-
+        # replacing the image name in the k8s template
+        cp ./yaml_files/deploy-oawebapp.yaml ./kustomize/kustomization.yaml
+        
+        ./kustomize edit set image ${{ env.CLUSTER_NAME }}:${{ env.TAG }}
+        ./kustomize build . | kubectl apply -f -
