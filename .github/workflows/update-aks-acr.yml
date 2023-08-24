@@ -4,7 +4,7 @@ on: workflow_dispatch
 
 env:
   AZURE_RG: oa-poc-rg
-  AKS_CLUSTER_NAME: AKSClsuter-Demo
+  AKS_CLUSTER_NAME: AKSCluster-Demo
   ACR_NAME: ${{ secrets.ACR_NAME }}
 
 jobs:
