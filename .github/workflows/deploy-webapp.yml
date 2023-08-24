@@ -46,4 +46,4 @@ jobs:
         cat kustomization.yaml
         ./kustomize build .
         cat kustomization.yaml
-        kubectl create -f kustomization.yaml -n ${{ env.NAMESPACE }}
+        kubectl create -f kustomization.yaml
