@@ -16,7 +16,7 @@ spec:
         app: oaappconfig
     spec:
       containers:
-      - image: ["HERE YOUR ACR NAME"].azurecr.io/oawebappconfig
+      - image: hereyouracr.azurecr.io/oawebappconfig
         name: oaappconfig
         env:
         - name: APPCONFIG_CS
