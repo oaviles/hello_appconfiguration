@@ -23,4 +23,4 @@ jobs:
       uses: Azure/cli@v1
       with:
         inlineScript: |
-          az aks update -g ${{ secrets.AZURE_RG }} -n ${{ env.AKS_CLUSTER_NAME }} --attach-acr ${{ env.ACR_NAME }}
+          az aks update -g ${{ env.AZURE_RG }} -n ${{ env.AKS_CLUSTER_NAME }} --attach-acr ${{ env.ACR_NAME }}
