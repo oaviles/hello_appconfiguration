@@ -30,7 +30,9 @@ jobs:
     - name: Deploy
       run: |-
         # replacing the image name in the k8s template
-        cp ./yaml_files/deploy-oawebapp.yaml ./kustomize/kustomization.yaml
+        ls -l
+        cd yaml_files
+        cp deploy-oawebapp.yaml kustomization.yaml
         
         ./kustomize edit set image ${{ env.CLUSTER_NAME }}:${{ env.TAG }}
         ./kustomize build . | kubectl apply -f -
