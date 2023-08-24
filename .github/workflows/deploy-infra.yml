@@ -28,15 +28,6 @@ jobs:
           az group create --location ${{ env.AZURE_REGION }} --name ${{ env.AZURE_RG }}  
 
       # Deploy Bicep file
-    - name: Deploy AKS
-      uses: azure/arm-deploy@v1
-      with:
-        subscriptionId: ${{ env.AZURE_SUBSCRIPTION }}
-        resourceGroupName: ${{ env.AZURE_RG }}
-        template: ./IaC/aks/main.bicep
-        parameters: ./IaC/aks/azuredeploy.parameters.json
-        failOnStdErr: false
-
     - name: Deploy App Config
       uses: azure/arm-deploy@v1
       with:
@@ -44,4 +35,15 @@ jobs:
         resourceGroupName: ${{ env.AZURE_RG }}
         template: ./IaC/appconfig/main.bicep
         parameters: ./IaC/appconfig/azuredeploy.parameters.json
+        deploymentName: appconfig-deployment
+        failOnStdErr: false
+
+    - name: Deploy AKS
+      uses: azure/arm-deploy@v1
+      with:
+        subscriptionId: ${{ env.AZURE_SUBSCRIPTION }}
+        resourceGroupName: ${{ env.AZURE_RG }}
+        template: ./IaC/aks/main.bicep
+        parameters: ./IaC/aks/azuredeploy.parameters.json
+        deploymentName: aks-deployment
         failOnStdErr: false
