@@ -24,6 +24,8 @@ jobs:
         cluster-name: ${{ env.CLUSTER_NAME }}
         resource-group: ${{ env.AZURE_RG }}
 
+    - uses: azure/setup-kubectl@v2.0
+
       # Runs Kustomize to create manifest files
     - name: Bake deployment
       uses: azure/k8s-bake@v2
@@ -32,6 +34,10 @@ jobs:
         kustomizationPath: ${{ env.KUSTOMIZE_PATH }}
         kubectl-version: latest
       id: bake
+
+    - name: Create Namespace
+      run: |
+          kubectl create ns ${{ env.NAMESPACE }}
 
       # Deploys application based on manifest files from previous step
     - name: Deploy application
