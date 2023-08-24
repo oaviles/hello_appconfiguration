@@ -6,7 +6,7 @@ env:
   AZURE_REGION: eastus
   AZURE_RG: oa-poc-rg
   APP_CONFIGURATION_NAME: oaappconfig02
-  MESSAGE: "OA was here. V1.0\"
+  MESSAGE: "OA was here. V1.0"
   
 
 jobs:
