@@ -7,3 +7,6 @@ resources:
 - deploy-webapp.yaml
 - service-webapp.yaml
 
+images:
+- name: hereyouracr.azurecr.io/oawebappconfig
+  newTag: 5141
