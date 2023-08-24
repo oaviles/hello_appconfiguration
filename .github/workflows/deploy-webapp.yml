@@ -28,10 +28,10 @@ jobs:
 
     - name: Set up Kustomize
       run: |-
+        cd yaml_files
         curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
         chmod u+x ./kustomize
-        mv kustomize /usr/local/bin
-        kustomize --help
+        ./kustomize --help
 
     - name: Create Namespace
       run: |
@@ -42,6 +42,6 @@ jobs:
       run: |-
         # replacing the image name in the k8s template
         cd yaml_files
-        kustomize edit set image ${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
+        ./kustomize edit set image ${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
         cat kustomization.yaml
-        kustomize build . | kubectl apply -f -     
+        ./kustomize build . | kubectl apply -f -     
