@@ -4,7 +4,6 @@ metadata:
   labels:
     app: oaappconfig
   name: oaappconfig
-  namespace: appconfig
 spec:
   replicas: 1
   selector:
