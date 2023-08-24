@@ -26,6 +26,7 @@ jobs:
       run: |-
         curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
         chmod u+x ./kustomize
+        ls -l
 
     - name: Deploy
       run: |-
@@ -34,5 +35,5 @@ jobs:
         cd yaml_files
         cp deploy-oawebapp.yaml kustomization.yaml
         
-        ./kustomize edit set image ${{ env.CLUSTER_NAME }}:${{ env.TAG }}
-        ./kustomize build . | kubectl apply -f -
+        kustomize edit set image ${{ env.CLUSTER_NAME }}:${{ env.TAG }}
+        kustomize build . | kubectl apply -f -
