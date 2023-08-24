@@ -41,12 +41,7 @@ jobs:
     - name: Deploy
       run: |-
         # replacing the image name in the k8s template
-        ls -s
         cd yaml_files
-        ls -l
         kustomize edit set image ${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
-        kustomize build . 
         cat kustomization.yaml
-        kubectl create -f kustomization.yaml -n ${{ env.NAMESPACE }}
-
-        
+        kustomize build . | kubectl apply -f -     
