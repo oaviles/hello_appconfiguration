@@ -42,8 +42,5 @@ jobs:
       run: |-
         # replacing the image name in the k8s template
         cd yaml_files
-        ./kustomize edit set image ${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
-        cat kustomization.yaml
-        ./kustomize build .
-        cat kustomization.yaml
-        kubectl create -f kustomization.yaml
+        ./kustomize edit set image hereyourimage.azurecr.io/oawebappconfig=${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
+        ./kustomize build . | kubectl apply -f - 
