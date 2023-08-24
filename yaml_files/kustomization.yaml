@@ -8,5 +8,6 @@ resources:
 - service-webapp.yaml
 
 images:
-- name: hereyouracr.azurecr.io/oawebappconfig
+- name: appconfig
+  newName: hereyouracr.azurecr.io/oawebappconfig
   newTag: 5141
