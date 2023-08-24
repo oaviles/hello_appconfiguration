@@ -10,7 +10,7 @@ env:
   
 
 jobs:
-  deploy-bicep-template:
+  set-key-appconfig:
     runs-on: ubuntu-latest
     steps:
 
