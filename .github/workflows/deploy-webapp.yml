@@ -8,6 +8,7 @@ env:
   NAMESPACE: appconfig
   IMAGE_NAME: oawebappconfig
   AZURE_CONTAINER_REGISTRY: ${{ secrets.CONTAINER_REGISTRY }}
+  KUSTOMIZE_PATH: './yaml_files/'
   TAG: 5141
 
 jobs:
