@@ -33,9 +33,9 @@ jobs:
         chmod u+x ./kustomize
         ./kustomize --help
 
-    - name: Create Namespace
-      run: |
-        kubectl create ns ${{ env.NAMESPACE }}
+  #  - name: Create Namespace
+  #    run: |
+  #      kubectl create ns ${{ env.NAMESPACE }}
 
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
