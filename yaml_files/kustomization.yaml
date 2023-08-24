@@ -1,27 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-namespace: appconfig  # Set the target namespace for resources
-
-commonLabels:
-  app: oaappconfig
-  env: poc
-
 resources:
 - deploy-webapp.yaml
 - service-webapp.yaml
-
-images:
-- name: nginx
-  newName: nginx
-  newTag: 4151
-
-vars:
-- name: APPCONFIG_CS
-  objref:
-    kind: Deployment
-    name: oaappconfig
-  fieldref:
-    fieldpath: spec.template.spec.containers[0].env[?(@.name=="APPCONFIG_CS")].value
-  value: Pod2
 
