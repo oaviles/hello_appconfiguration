@@ -1,4 +1,4 @@
-b name: 5 Deploy Web App
+name: 5 Deploy Web App
 
 on: [workflow_dispatch]
 
