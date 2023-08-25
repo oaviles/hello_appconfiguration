@@ -10,6 +10,7 @@ env:
   AZURE_CONTAINER_REGISTRY: ${{ secrets.CONTAINER_REGISTRY }}
   KUSTOMIZE_PATH: './yaml_files/'
   TAG: 5141
+  APP_NAME: oaappconfig
 
 jobs:
   deploy-webapp:
@@ -33,14 +34,17 @@ jobs:
         chmod u+x ./kustomize
         ./kustomize --help
 
-  #  - name: Create Namespace
-  #    run: |
-  #      kubectl create ns ${{ env.NAMESPACE }}
+    - name: Create Namespace
+      run: |
+       kubectl create ns ${{ env.NAMESPACE }}
+       kubectl create deploy ${{ env.APP_NAME }} --image=${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }} -n ${{ env.NAMESPACE }}
+       kubectl expose deployment ${{ env.APP_NAME }} --type=LoadBalancer --name=${{ env.APP_NAME }} --port=80 --target-port=${{ env.TAG }} 
+       
 
     # Deploy the Docker image to the GKE cluster
-    - name: Deploy
-      run: |-
-        # replacing the image name in the k8s template
-        cd yaml_files
-        ./kustomize edit set image hereyourimage.azurecr.io/oawebappconfig=${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
-        ./kustomize build . | kubectl apply -f - 
+#    - name: Deploy
+#      run: |-
+#        # replacing the image name in the k8s template
+#        cd yaml_files
+#        ./kustomize edit set image hereyourimage.azurecr.io/oawebappconfig=${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
+#        ./kustomize build . | kubectl apply -f - 
