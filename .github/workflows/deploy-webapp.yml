@@ -53,7 +53,7 @@ jobs:
     
 
     # Deploy  Web App with Kustomize
-    - name: Deploy
+    - name: Deploy Web App
       run: |-
         # replacing the image name in the k8s template
         cd yaml_files
