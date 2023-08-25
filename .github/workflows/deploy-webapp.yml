@@ -3,7 +3,7 @@ name: 5 Deploy Web App
 on: [workflow_dispatch]
 
 env:
-  CLUSTER_NAME: AKSClsuter-Demo
+  CLUSTER_NAME: AKSCluster-Demo
   AZURE_RG: oa-poc-rg
   NAMESPACE: appconfig
   IMAGE_NAME: oawebappconfig
