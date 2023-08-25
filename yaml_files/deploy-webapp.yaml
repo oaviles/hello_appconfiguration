@@ -21,7 +21,7 @@ spec:
         - name: APPCONFIG_CS
           value: "{APPCONFIG_CS}"
         - name: APPCONFIG_KEY
-          value: "{APPCONFIG_CS}"
+          value: "{APPCONFIG_KEY}"
         imagePullPolicy: Always
         ports:
         - containerPort: 5141
