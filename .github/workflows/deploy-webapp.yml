@@ -1,4 +1,4 @@
-name: 5 Deploy Web App
+b name: 5 Deploy Web App
 
 on: [workflow_dispatch]
 
@@ -36,14 +36,14 @@ jobs:
         chmod u+x ./kustomize
         ./kustomize --help
 
-    - name: Create Namespace
+    - name: Deploy Web App
       run: |
        kubectl create ns ${{ env.NAMESPACE }}
        kubectl create deploy ${{ env.APP_NAME }} --image=${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }} --env="APPCONFIG_CS=${{ env.APPCONFIG_CS }}" --env="APPCONFIG_KEY=${{ env.PREFIX }}" -n ${{ env.NAMESPACE }}
        kubectl expose deployment ${{ env.APP_NAME }} --type=LoadBalancer --name=${{ env.APP_NAME }} --port=80 --target-port=${{ env.TAG }} 
        
 
-    # Deploy the Docker image to the GKE cluster
+    # Deploy  Web App with Kustomize
 #    - name: Deploy
 #      run: |-
 #        # replacing the image name in the k8s template
