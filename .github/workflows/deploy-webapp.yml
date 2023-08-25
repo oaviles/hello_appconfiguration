@@ -36,17 +36,26 @@ jobs:
         chmod u+x ./kustomize
         ./kustomize --help
 
-    - name: Deploy Web App
-      run: |-
-        kubectl create ns ${{ env.NAMESPACE }}
-        kubectl create deploy ${{ env.APP_NAME }} --image=${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }} -n ${{ env.NAMESPACE }}
-        kubectl expose deployment ${{ env.APP_NAME }} --type=LoadBalancer --name=${{ env.APP_NAME }} --port=80 --target-port=${{ env.TAG }} 
-       
+    - name: Replace tokens to set variables
+      # You may pin to the exact commit or the version.
+      # uses: cschleiden/replace-tokens@8e091844c27eb36853efbfade5ffca07260f0250
+      uses: cschleiden/replace-tokens@v1.2
+      with:
+        # 
+        tokenPrefix: '{'
+        # 
+        tokenSuffix: '}'
+        # 
+        files: '["yaml_files/deploy-webapp.yaml"]'
+      env:
+        APPCONFIG_CS: ${{ env.APPCONFIG_CS }}
+        APPCONFIG_KEY: ${{ env.PREFIX }}
+    
 
     # Deploy  Web App with Kustomize
-#    - name: Deploy
-#      run: |-
-#        # replacing the image name in the k8s template
-#        cd yaml_files
-#        ./kustomize edit set image hereyourimage.azurecr.io/oawebappconfig=${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
-#        ./kustomize build . | kubectl apply -f - 
+    - name: Deploy
+      run: |-
+        # replacing the image name in the k8s template
+        cd yaml_files
+        ./kustomize edit set image hereyourimage.azurecr.io/oawebappconfig=${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
+        ./kustomize build . | kubectl apply -f - 
