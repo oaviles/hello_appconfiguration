@@ -37,7 +37,7 @@ jobs:
         ./kustomize --help
 
     - name: Deploy Web App
-      run: |
+      run: |-
        kubectl create ns ${{ env.NAMESPACE }}
        kubectl create deploy ${{ env.APP_NAME }} --image=${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }} --env="APPCONFIG_CS=${{ env.APPCONFIG_CS }}" --env="APPCONFIG_KEY=${{ env.PREFIX }}" -n ${{ env.NAMESPACE }}
        kubectl expose deployment ${{ env.APP_NAME }} --type=LoadBalancer --name=${{ env.APP_NAME }} --port=80 --target-port=${{ env.TAG }} 
