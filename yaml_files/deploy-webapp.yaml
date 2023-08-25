@@ -19,9 +19,9 @@ spec:
         name: oaappconfig
         env:
         - name: APPCONFIG_CS
-          value: "HERE YOUR APP CONFIG CONNECTION STRING"
+          value: "{APPCONFIG_CS}"
         - name: APPCONFIG_KEY
-          value: "HERE YOUR CONFIGURATION KEYS PREFIX"
+          value: "{APPCONFIG_CS}"
         imagePullPolicy: Always
         ports:
         - containerPort: 5141
