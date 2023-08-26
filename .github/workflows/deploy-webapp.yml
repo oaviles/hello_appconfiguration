@@ -13,6 +13,7 @@ env:
   APP_NAME: oaappconfig
   PREFIX: Pod2
   APPCONFIG_CS: ${{ secrets.APPCONFIG_CS }}
+  IMAGE_ON_YAML: hereyourimage.azurecr.io/oawebappconfig
 
 jobs:
   deploy-webapp:
@@ -57,5 +58,5 @@ jobs:
       run: |-
         # replacing the image name in the k8s template
         cd yaml_files
-        ./kustomize edit set image hereyourimage.azurecr.io/oawebappconfig=${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
+        ./kustomize edit set image ${{ ENV.IMAGE_ON_YAML }}=${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
         ./kustomize build . | kubectl apply -f - 
