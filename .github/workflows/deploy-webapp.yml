@@ -11,7 +11,7 @@ env:
   KUSTOMIZE_PATH: './yaml_files/'
   TAG: 5141
   APP_NAME: oaappconfig
-  PREFIX: Pod2
+  PREFIX: Pod1
   APPCONFIG_CS: ${{ secrets.APPCONFIG_CS }}
   IMAGE_ON_YAML: hereyourimage.azurecr.io/oawebappconfig
 
